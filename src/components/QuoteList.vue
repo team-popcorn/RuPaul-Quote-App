@@ -4,9 +4,9 @@
     <h3>{{ subtitle }} </h3>
     <div>
       <ul>
-        <li v-for="quote in quotes">
+        <li v-for="quote in quotes" :key="quote.quote">
           <p>
-            &#34;{{quote.quote}}&#34; 
+            &#34;{{quote.quote}}&#34;
           </p>
             - <em> {{quote.author}} </em>
             <button class="btn btn-rmv" v-on:click="deleteQuote(quote)">X</button>
@@ -15,7 +15,7 @@
       </ul>
     </div>
     <div id="quote-input-block">
-      <input id="quote-input" type="text" v-model="input_val_quote" placeholder="Quote" > 
+      <input id="quote-input" type="text" v-model="input_val_quote" placeholder="Quote" >
       <input id="author-input" type="text" v-model="input_val_author" placeholder="Author">
       <button class="btn btn-primary" v-on:click="addQuote()">Add</button>
     </div>
@@ -29,26 +29,26 @@ export default {
       title: 'You Better Work!',
       subtitle: '#wordstoliveyourlifeby',
       quotes: [
-        {"author": "Rupaul", "quote" : "If you can’t love yourself how in the hell you gonna love somebody else."}, 
-        {"author": "Rupaul", "quote" : "What other people think of you is none of your business."},
-        {"author": "Rupaul", "quote" : "Throwing shade takes a bit of creativity, being a bitch takes none"},
-        {"author": "Rupaul", "quote" : "Look at me — a big old black man under all of this makeup, and if I can look beautiful, so can you"},
-        {"author": "Rupaul", "quote" : "When you become the image of your own imagination, it’s the most powerful thing you could ever do."},
-        {"author": "Rupaul", "quote" : "Expectations lead to resentments and when you allow people to just be themselves the relationship can really grow"},
-        {"author": "Rupaul", "quote" : "Don't F*** it up!"},
+        {'author': 'Rupaul', 'quote': 'If you can’t love yourself how in the hell you gonna love somebody else.'},
+        {'author': 'Rupaul', 'quote': 'What other people think of you is none of your business.'},
+        {'author': 'Rupaul', 'quote': 'Throwing shade takes a bit of creativity, being a bitch takes none'},
+        {'author': 'Rupaul', 'quote': 'Look at me — a big old black man under all of this makeup, and if I can look beautiful, so can you'},
+        {'author': 'Rupaul', 'quote': 'When you become the image of your own imagination, it’s the most powerful thing you could ever do.'},
+        {'author': 'Rupaul', 'quote': 'Expectations lead to resentments and when you allow people to just be themselves the relationship can really grow'},
+        {'author': 'Rupaul', 'quote': 'Dont F*** it up!'}
       ],
       input_val_quote: '',
       input_val_author: ''
     }
   },
   methods: {
-    addQuote() {
-      this.quotes.push({"author": this.input_val_author, "quote" : this.input_val_quote});
+    addQuote () {
+      this.quotes.push({'author': this.input_val_author, 'quote': this.input_val_quote})
     },
-    deleteQuote(quote) {
-      this.quotes.pop(quote);
+    deleteQuote (quote) {
+      this.quotes.pop(quote)
     }
-  },
+  }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
