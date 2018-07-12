@@ -3,7 +3,58 @@
     <h1>{{ title }}</h1>
     <h3>{{ subtitle }} </h3>
     <div>
-      <ul>
+      <div id="quotes" v-if="loading">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="lds-spinner" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" style="background: none;"><g transform="rotate(0 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.9166666666666666s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(30 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.8333333333333334s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(60 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.75s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(90 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.6666666666666666s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(120 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5833333333333334s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(150 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.5s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(180 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.4166666666666667s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(210 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.3333333333333333s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(240 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.25s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(270 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.16666666666666666s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(300 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="-0.08333333333333333s" repeatCount="indefinite"/>
+            </rect>
+          </g><g transform="rotate(330 50 50)">
+            <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
+              <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"/>
+            </rect>
+          </g></svg>
+          </div>
+      <ul v-else>
         <li v-for="quote in quotes" :key="quote.quote">
           <p>
             &#34;{{quote.quote}}&#34;
@@ -15,42 +66,54 @@
       </ul>
     </div>
     <div id="quote-input-block">
-      <input id="quote-input" type="text" v-model="input_val_quote" placeholder="Quote" >
-      <input id="author-input" type="text" v-model="input_val_author" placeholder="Author">
-      <button class="btn btn-primary" v-on:click="addQuote()">Add</button>
+      <input id="quote-input" type="text" v-model="inputValQuote" placeholder="Quote" >
+      <input id="author-input" type="text" v-model="inputValAuthor" placeholder="Author">
+      <button class="btn btn-primary" v-on:click="addQuote(inputValQuote, inputValAuthor)">Add</button>
     </div>
   </div>
 </template>
 <script>
+
 export default {
-  name: 'to-do',
+  name: 'QuoteList',
   data () {
     return {
       title: 'You Better Work!',
       subtitle: '#wordstoliveyourlifeby',
-      quotes: [
-        {'author': 'Rupaul', 'quote': 'If you can’t love yourself how in the hell you gonna love somebody else.'},
-        {'author': 'Rupaul', 'quote': 'What other people think of you is none of your business.'},
-        {'author': 'Rupaul', 'quote': 'Throwing shade takes a bit of creativity, being a bitch takes none'},
-        {'author': 'Rupaul', 'quote': 'Look at me — a big old black man under all of this makeup, and if I can look beautiful, so can you'},
-        {'author': 'Rupaul', 'quote': 'When you become the image of your own imagination, it’s the most powerful thing you could ever do.'},
-        {'author': 'Rupaul', 'quote': 'Expectations lead to resentments and when you allow people to just be themselves the relationship can really grow'},
-        {'author': 'Rupaul', 'quote': 'Dont F*** it up!'}
-      ],
-      input_val_quote: '',
-      input_val_author: ''
+      inputValQuote: '',
+      inputValAuthor: '',
+      loading: false
     }
   },
+
+  computed: {
+    quotes () {
+      return this.$store.getters.rupaulQuotes
+    }
+  },
+
+  created () {
+    this.loading = true
+    // eslint-disable-next-line
+    this.$store.dispatch('fetchQuotes').then(() => this.loading = false)
+  },
+
   methods: {
-    addQuote () {
-      this.quotes.push({'author': this.input_val_author, 'quote': this.input_val_quote})
+    addQuote (inputValQuote, inputValAuthor) {
+      let quote = {author: inputValAuthor, quote: inputValQuote}
+      this.$store.dispatch('addToList', quote)
+      this.loading = true
+      // eslint-disable-next-line
+      this.$store.dispatch('fetchQuotes').then(() => this.loading = false)
     },
     deleteQuote (quote) {
-      this.quotes.pop(quote)
+      this.$store.dispatch('removeFromList', quote)
+      this.$store.dispatch('fetchQuotes')
     }
   }
 }
 </script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1 {
@@ -87,10 +150,19 @@ hr {
 .quote-list {
   box-sizing: border-box;
   width: 600px;
+  height: fit-content;
   margin: auto;
   background: #fe67e3;
   padding: 10px 10px 80px 10px;
   margin-bottom: 100px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+#quotes{
+  transition-timing-function: ease-in;
+  -webkit-transition: height 2s; /* Safari */
+  transition: height 100s;
 }
 .btn-rmv{
   display: inline;

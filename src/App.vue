@@ -6,12 +6,11 @@
 </template>
 
 <script>
-import QuoteList from './components/QuoteList'
 
 export default {
   name: 'App',
   components: {
-    QuoteList
+
   }
 }
 </script>
