@@ -1,3 +1,6 @@
+# :heart View on Github Pages :heart
+https://team-popcorn.github.io/RuPaul-Quote-App/
+
 # :computer: :memo: how to 
 
 1. Clone the repo and cd into the directory.
