@@ -52,13 +52,13 @@
           </g>
         </svg>
       </div>
-      <div v-else>
+      <div class="random-quote" v-else>
         <p>
             &#34;{{quotes[index].quote}}&#34;
         </p>
         - <em>{{quotes[index].author}}</em>
         <div id="quote-generate">
-        <button class="btn btn-primary" v-on:click="nextQuote()">Update</button>
+          <button class="btn btn-primary" v-on:click="nextQuote()">Update</button>
         </div>
       </div>
       <li><router-link to="/QuoteList">Add your own Rupaul Quotes</router-link></li>
@@ -76,9 +76,8 @@ export default {
   },
   methods: {
     nextQuote () {
-      this.$store.dispatch('')
       // eslint-disable-next-line
-      this.$store.dispatch('fetchQuotes')
+      this.$store.dispatch('updateIndex').then(() => this.$store.dispatch('fetchQuotes'))
     }
   },
   computed: {
@@ -86,7 +85,7 @@ export default {
       return this.$store.getters.rupaulQuotes
     },
     index () {
-      return Math.floor(Math.random() * this.$store.state.quotes.length)
+      return this.$store.getters.randomIndex
     }
   },
 
@@ -94,8 +93,8 @@ export default {
     this.loading = true
     // eslint-disable-next-line
     this.$store.dispatch('fetchQuotes').then(() => {
+      this.$store.dispatch('setIndex')
       this.loading = false
-      this.randomQuote = Math.floor(Math.random() * this.$store.state.quotes.length)
     })
   }
 }
@@ -103,37 +102,6 @@ export default {
 
 <style scoped>
 
-h1 {
-  font-family: 'Monoton', cursive;
-  font-weight: normal;
-  font-stretch: ultra-expanded;
-}
-h3 {
-  font-style: italic;
-  font-family: 'Shrikhand', cursive;
-  letter-spacing: 1px;
-}
-ul {
-  /*list-style-type: none;*/
-  padding: 0;
-}
-li {
-  display: block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-input , button{
-  font-family: 'Roboto Mono', monospace;
-}
-hr {
-    border: none;
-    border-bottom: solid 1px #ffffff66;
-}
-#quote-input-block {
-  margin: 50px 0px;
-}
 .quote-list {
   box-sizing: border-box;
   width: 600px;
@@ -144,18 +112,38 @@ hr {
   margin-bottom: 100px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
-#quotes{
+.random-quote {
+  display: flex;
+  flex-direction: column;
+}
+.random-quote btn {
+  margin: 20px;
+}
+#quotes {
   transition-timing-function: ease-in;
   -webkit-transition: height 2s; /* Safari */
   transition: height 100s;
 }
-.btn-rmv{
-  display: inline;
-  border: none;
-  background: #fe67e3;
+#quote-generate {
+  padding: 20px 10px;
+}
+button {
+  border-radius: 5px;
+}
+li {
+  padding: 10px;
+  width: 50%;
+  margin: auto;
+  border: solid 2px white;
+  border-radius: 15px;
+}
+li a {
   color: white;
-  font-weight: 800;
+  text-decoration: none;
 }
 </style>

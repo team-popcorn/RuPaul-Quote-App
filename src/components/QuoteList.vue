@@ -72,9 +72,11 @@
       <input id="author-input" type="text" v-model="inputValAuthor" placeholder="Author">
       <button class="btn btn-primary" v-on:click="addQuote(inputValQuote, inputValAuthor)">Add</button>
     </div>
+    <li class="router"><router-link to="/">Back to a random quote from your favourite drag queen</router-link></li>
   </div>
 </template>
 <script>
+import Quote from '@/components/Quote'
 
 export default {
   name: 'QuoteList',
@@ -132,34 +134,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  font-family: 'Monoton', cursive;
-  font-weight: normal;
-  font-stretch: ultra-expanded;
-}
-h3 {
-  font-style: italic;
-  font-family: 'Shrikhand', cursive;
-  letter-spacing: 1px;
-}
-ul {
-  /*list-style-type: none;*/
-  padding: 0;
-}
-li {
-  display: block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-input , button{
-  font-family: 'Roboto Mono', monospace;
-}
-hr {
-    border: none;
-    border-bottom: solid 1px #ffffff66;
-}
+
 #quote-input-block {
   margin: 50px 0px;
 }
@@ -187,4 +162,16 @@ hr {
   color: white;
   font-weight: 800;
 }
+.router {
+  padding: 10px;
+  width: 50%;
+  margin: auto;
+  border: solid 2px white;
+  border-radius: 15px;
+}
+.router a {
+  color: white;
+  text-decoration: none;
+}
+
 </style>

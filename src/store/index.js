@@ -12,12 +12,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: { // = data
     quotes: [],
-    randomQuote: {}
+    index: 0
   },
 
   getters: { // = computed properties
     rupaulQuotes (state, getters) {
       return state.quotes.filter(quote => quote.author === 'Rupaul')
+    },
+    randomIndex (state, getters) {
+      return state.index
     }
   },
 
@@ -32,6 +35,17 @@ export default new Vuex.Store({
           resolve()
         })
       })
+    },
+    setIndex (context) {
+      // run getIndex mutation
+      context.commit('setIndex', context.state.index)
+    },
+    updateIndex (context) {
+      if (context.state.index > context.state.quotes.length - 2) {
+        context.commit('indexZero')
+      } else {
+        context.commit('indexIncrement')
+      }
     },
     addToList (context, quote) {
       console.log(context.state.quotes)
@@ -66,6 +80,15 @@ export default new Vuex.Store({
     removeQuote (state, quote) {
       // remove quote from list
       state.quotes.splice(state.quotes.indexOf(quote), 1)
+    },
+    setIndex (state) {
+      state.index = Math.floor(Math.random() * state.quotes.length)
+    },
+    indexZero (state) {
+      state.index = 0
+    },
+    indexIncrement (state) {
+      state.index += 1
     }
   }
 })
