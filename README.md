@@ -30,7 +30,10 @@ npm run build --report
 
 # Still to develop
 
+- [x] Add random generator front page
+- [x] Add routing and different pages
 - [ ] Save local list
 - [ ] Make quote separate components
-- [ ] Add random generator front page
-- [ ] Add routing and different pages
+- [ ] Add separate views
+- [ ] Change to CSS Grid
+- [ ] Use SCSS
