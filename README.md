@@ -1,4 +1,4 @@
-# :heart View on Github Pages :heart
+# :heart: View on Github Pages :heart:
 https://team-popcorn.github.io/RuPaul-Quote-App/
 
 # :computer: :memo: how to 
