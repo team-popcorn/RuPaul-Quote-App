@@ -11,13 +11,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'QuoteList',
-      component: QuoteList
-    },
-    {
-      path: '/RandomQuote',
       name: 'RandomQuote',
       component: RandomQuote
+    },
+    {
+      path: '/QuoteList',
+      name: 'QuoteList',
+      component: QuoteList
     }
   ]
 })

@@ -52,9 +52,11 @@
             <rect x="47" y="24" rx="9.4" ry="4.8" width="6" height="12" fill="#fefbfe">
               <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"/>
             </rect>
-          </g></svg>
-          </div>
+          </g>
+        </svg>
+      </div>
       <ul v-else>
+        <Quote></Quote>
         <li v-for="quote in quotes" :key="quote.quote">
           <p>
             &#34;{{quote.quote}}&#34;
@@ -76,12 +78,15 @@
 
 export default {
   name: 'QuoteList',
+  components: {
+    Quote
+  },
   data () {
     return {
       title: 'You Better Work!',
       subtitle: '#wordstoliveyourlifeby',
       inputValQuote: '',
-      inputValAuthor: '',
+      inputValAuthor: 'Rupaul',
       loading: false
     }
   },
@@ -96,11 +101,22 @@ export default {
     this.loading = true
     // eslint-disable-next-line
     this.$store.dispatch('fetchQuotes').then(() => this.loading = false)
+    this.$store.watch(
+      function (state) {
+        return state.quotes
+      },
+      function () {
+        localStorage.setItem('quotes', JSON.stringify(this.$state.quotes))
+      },
+      {
+        deep: true // add this if u need to watch object properties change etc.
+      }
+    )
   },
 
   methods: {
     addQuote (inputValQuote, inputValAuthor) {
-      let quote = {author: inputValAuthor, quote: inputValQuote}
+      let quote = {'author': inputValAuthor, 'quote': inputValQuote}
       this.$store.dispatch('addToList', quote)
       this.loading = true
       // eslint-disable-next-line

@@ -11,7 +11,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: { // = data
-    quotes: []
+    quotes: [],
+    randomQuote: {}
   },
 
   getters: { // = computed properties
@@ -33,9 +34,19 @@ export default new Vuex.Store({
       })
     },
     addToList (context, quote) {
-      // push new quote to list
-      console.log(quote)
-      context.commit('addQuote', quote)
+      console.log(context.state.quotes)
+      try {
+        // check if quote already exists
+        for (var item in context.state.quotes) {
+          if (context.state.quotes[item].quote === quote.quote) {
+            console.log('Duplicate')
+            return
+          }
+        }
+        context.commit('addQuote', quote)
+      } catch (e) {
+        console.log(e)
+      }
     },
     removeFromList (context, quote) {
       // remove quote from list
@@ -49,13 +60,8 @@ export default new Vuex.Store({
       state.quotes = quotes
     },
     addQuote (state, quote) {
-      // check if quote already exists
-      if (state.quotes.indexOf(quote) !== 0) {
-        // add quote to list
-        state.quotes.push(quote)
-      } else {
-        console.log('Duplicate entry')
-      }
+      // push new quote to list
+      state.quotes.push(quote)
     },
     removeQuote (state, quote) {
       // remove quote from list
