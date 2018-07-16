@@ -55,16 +55,8 @@
           </g>
         </svg>
       </div>
-      <ul v-else>
-        <Quote></Quote>
-        <li v-for="quote in quotes" :key="quote.quote">
-          <p>
-            &#34;{{quote.quote}}&#34;
-          </p>
-            - <em> {{quote.author}} </em>
-            <button class="btn btn-rmv" v-on:click="deleteQuote(quote)">X</button>
-            <hr>
-        </li>
+      <ul v-else v-for="quote in quotes" :key="quote.quote">
+          <Quote v-bind="quote"></Quote>
       </ul>
     </div>
     <div id="quote-input-block">
@@ -93,27 +85,9 @@ export default {
     }
   },
 
-  computed: {
-    quotes () {
-      return this.$store.getters.rupaulQuotes
-    }
-  },
-
   created () {
     this.loading = true
-    // eslint-disable-next-line
     this.$store.dispatch('fetchQuotes').then(() => this.loading = false)
-    this.$store.watch(
-      function (state) {
-        return state.quotes
-      },
-      function () {
-        localStorage.setItem('quotes', JSON.stringify(this.$state.quotes))
-      },
-      {
-        deep: true // add this if u need to watch object properties change etc.
-      }
-    )
   },
 
   methods: {
@@ -123,10 +97,6 @@ export default {
       this.loading = true
       // eslint-disable-next-line
       this.$store.dispatch('fetchQuotes').then(() => this.loading = false)
-    },
-    deleteQuote (quote) {
-      this.$store.dispatch('removeFromList', quote)
-      this.$store.dispatch('fetchQuotes')
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <li>
     <p>
-      &#34;Test&#34;
+      &#34; {{quote.quote}} &#34;
     </p>
-    - <em> Author </em>
+    - <em> {{quote.author}} </em>
     <button class="btn btn-rmv" v-on:click="deleteQuote(quote)">X</button>
     <hr>
   </li>
@@ -17,7 +17,9 @@ export default {
     return {
     }
   },
-
+  props: {
+    quote
+  },
   computed: {
   },
 

@@ -6,10 +6,50 @@
 </template>
 
 <script>
+import QuoteList from '@/components/QuoteList'
+import Quote from '@/components/Quote'
+import RandomQuote from '@/components/RandomQuote'
 
 export default {
   name: 'App',
   components: {
+    QuoteList,
+    Quote,
+    RandomQuote
+  },
+  mounted () {
+    console.log('App mounted!')
+  },
+  data () {
+    return {
+      title: 'You Better Work!',
+      subtitle: '#wordstoliveyourlifeby',
+      inputValQuote: '',
+      inputValAuthor: 'Rupaul',
+      loading: false
+    }
+  },
+
+  computed: {
+    quotes () {
+      return this.$store.getters.rupaulQuotes
+    }
+  },
+
+  created () {
+    this.loading = true
+    // logic to check for local storage file and push to store
+
+    // if no local storage file take from the store
+    // eslint-disable-next-line
+    this.$store.dispatch('fetchQuotes').then(() => this.loading = false)
+
+    // watch for change in store and update local storage
+    this.$store.watch(
+      function (state) {
+        localStorage.setItem('quotes', JSON.stringify(state.quotes))
+      }
+    )
   }
 }
 </script>
