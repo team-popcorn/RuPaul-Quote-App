@@ -1,0 +1,39 @@
+.quote-list {
+  box-sizing: border-box;
+  width: 600px;
+  height: fit-content;
+  margin: auto;
+  background: #fe67e3;
+  padding: 10px 10px 80px 10px;
+  margin-bottom: 100px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.random-quote {
+  display: flex;
+  flex-direction: column;
+}
+
+.random-quote btn {
+  margin: 20px;
+}
+
+#quotes {
+  transition-timing-function: ease-in;
+  -webkit-transition: height 2s;
+  /* Safari */
+  transition: height 100s;
+}
+
+#quote-generate {
+  padding: 20px 10px;
+}
+
+button {
+  border-radius: 5px;
+}

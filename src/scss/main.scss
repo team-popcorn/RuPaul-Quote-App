@@ -1,0 +1,53 @@
+#app {
+    font-family: 'Roboto Mono', monospace;
+    text-align: center;
+    color: #FFF;
+    margin-top: 60px;
+}
+#rupaul-header {
+    width: 600px;
+    margin: auto;
+    position: relative;
+    top: 10px;
+    border-bottom: solid 2px #e237c4;
+    box-shadow: 0px -11px 20px 0px #fff6fe;
+}
+h1 {
+    font-family: 'Monoton', cursive;
+    font-weight: normal;
+    font-stretch: ultra-expanded;
+}
+h3 {
+    font-style: italic;
+    font-family: 'Shrikhand', cursive;
+    letter-spacing: 1px;
+}
+ul {
+    /*list-style-type: none;*/
+    padding: 0;
+}
+li {
+    display: block;
+    margin: 0 10px;
+}
+a {
+    color: #42b983;
+}
+input , button{
+    font-family: 'Roboto Mono', monospace;
+}
+hr {
+    border: none;
+    border-bottom: solid 1px #ffffff66;
+}
+.router {
+    padding: 10px;
+    width: 50%;
+    margin: auto;
+    border: solid 2px white;
+    border-radius: 15px;
+    a {
+    color: white;
+    text-decoration: none;
+    }
+  }

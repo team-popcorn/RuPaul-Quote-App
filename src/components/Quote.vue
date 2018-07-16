@@ -1,47 +1,29 @@
 <template>
   <li>
     <p>
-      &#34; {{quote.quote}} &#34;
+      &#34;{{quote.quote}}&#34;
     </p>
     - <em> {{quote.author}} </em>
-    <button class="btn btn-rmv" v-on:click="deleteQuote(quote)">X</button>
+    <button v-on:click="deleteQuote(quote)">X</button>
     <hr>
   </li>
 </template>
 <script>
 
 export default {
-  components: {
-  },
-  data () {
-    return {
+  props: {
+    quote: {
+      type: Object
     }
   },
-  props: {
-    quote
-  },
-  computed: {
-  },
-
-  created () {
-  },
-
   methods: {
     deleteQuote (quote) {
       this.$store.dispatch('removeFromList', quote)
-      this.$store.dispatch('fetchQuotes')
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.btn-rmv{
-  display: inline;
-  border: none;
-  background: #fe67e3;
-  color: white;
-  font-weight: 800;
-}
+<style lang="scss" scoped>
+  @import '../scss/quote.scss'
 </style>

@@ -27,13 +27,20 @@ export default new Vuex.Store({
   actions: { // make AJAX call
     fetchQuotes (context) {
       return new Promise((resolve, reject) => {
-        // make the call
-        quotes.getQuotes(quotes => {
-          // run setQuotes mutation
-          context.commit('setQuotes', quotes)
-          // resolve promise
-          resolve()
-        })
+        // if no local storage file take from the store
+        if (localStorage.getItem('quotes')) {
+          // run setQuotes mutation with local storage
+          context.commit('setQuotes', JSON.parse(localStorage.getItem('quotes')))
+        } else {
+          quotes.getQuotes(quotes => {
+            // run setQuotes mutation with api
+            context.commit('setQuotes', quotes)
+            // resolve promise
+            resolve()
+          })
+        }
+        // resolve promise
+        resolve()
       })
     },
     setIndex (context) {
